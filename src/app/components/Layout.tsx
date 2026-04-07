@@ -17,7 +17,7 @@ export function Layout() {
     { path: "/app", icon: Home, label: "Home" },
     { path: "/app/benefits", icon: Gift, label: "Benefits" },
     { path: "/app/visit", icon: MapPin, label: "Visit" },
-    { path: "/app/progress", icon: TrendingUp, label: "Progress" },
+    { path: "/app/progress", icon: TrendingUp, label: "Your Impact" },
     { path: "/app/community", icon: Users, label: "Community" },
     { path: "/app/notifications", icon: Bell, label: "Notifications", badge: unreadCount },
   ];

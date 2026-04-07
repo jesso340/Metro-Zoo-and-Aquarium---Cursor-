@@ -245,7 +245,7 @@ export function LivestreamSummary() {
           to="/app/progress"
           className="flex items-center justify-center gap-2 bg-green-600 text-white py-4 rounded-xl font-semibold hover:bg-green-700 transition-colors"
         >
-          View Your Progress
+          View Your Impact
           <ArrowRight size={20} />
         </Link>
         <Link 

@@ -133,7 +133,7 @@ export function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/40 to-transparent" />
             <Link to="/app/progress" className="relative z-10 p-6 h-full flex flex-col justify-end text-white min-h-[200px]">
               <div className="text-3xl font-semibold mb-1">📈</div>
-              <div className="opacity-90 mb-1 text-[16px] font-bold">Your Progress</div>
+              <div className="opacity-90 mb-1 text-[16px] font-bold">Your Impact</div>
               <div className="opacity-75 text-[14px]">Track your journey</div>
             </Link>
           </div>

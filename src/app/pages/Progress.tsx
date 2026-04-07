@@ -60,7 +60,7 @@ export function Progress() {
     <div className="space-y-8 pb-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-semibold text-neutral-900 mb-2">Your Progress</h1>
+        <h1 className="text-3xl font-semibold text-neutral-900 mb-2">Your Impact</h1>
         <p className="text-neutral-600">Track your membership journey and achievements</p>
       </div>
 
