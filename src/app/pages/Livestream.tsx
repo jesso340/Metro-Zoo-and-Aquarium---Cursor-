@@ -183,31 +183,15 @@ export function Livestream() {
             </div>
           </motion.div>
 
-          {/* Impact Progress - Compact */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-gradient-to-br from-green-900/50 to-emerald-900/50 border border-green-700/50 rounded-xl p-4 shrink-0"
+            className="shrink-0"
           >
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-[14px] font-semibold text-white">🌍 Your Impact</h3>
-              <span className="text-[14px] text-green-100">85 pts left</span>
-            </div>
-            <p className="text-[12px] text-green-200/80 mb-3 leading-tight">
-              Earn points to unlock a $5 donation to the African Penguin Conservation Fund.
-            </p>
-            <div className="w-full h-2 bg-green-950 rounded-full overflow-hidden">
-              <motion.div 
-                className="h-full bg-gradient-to-r from-green-400 to-emerald-300"
-                initial={{ width: "10%" }}
-                animate={{ width: "15%" }}
-                transition={{ duration: 1, delay: 0.5 }}
-              />
-            </div>
             <Link
               to="/app/progress"
-              className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-[13px] font-semibold transition-colors shadow-sm"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white text-[13px] font-semibold transition-colors shadow-sm"
             >
               See Membership Impact
               <ArrowRight size={16} strokeWidth={2} />
