@@ -1,6 +1,19 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Award, Trophy, Zap, Calendar, Gift, TrendingUp, Star, Lock, RefreshCw, Check } from "lucide-react";
+import confetti from "canvas-confetti";
+import {
+  Award,
+  Trophy,
+  Zap,
+  Calendar,
+  Gift,
+  TrendingUp,
+  Star,
+  Lock,
+  RefreshCw,
+  PartyPopper,
+  Sparkles,
+} from "lucide-react";
 import * as ProgressPrimitive from "@radix-ui/react-progress";
 import { pointsRewards as basePointsRewards } from "../data/mockData";
 
@@ -33,8 +46,31 @@ const progressRecentActivities = [
   { id: "5", type: "perk" as const, title: "Member lounge + gift shop savings", date: "December 3rd, 2025", value: 31 },
 ];
 
+const renewalConfettiColors = ["#16a34a", "#22c55e", "#4ade80", "#86efac", "#fbbf24", "#fde68a", "#34d399"];
+
+function fireRenewalConfetti() {
+  if (typeof window === "undefined") return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const burst = (opts: Parameters<typeof confetti>[0]) => {
+    void confetti({ ...opts, colors: renewalConfettiColors, disableForReducedMotion: true });
+  };
+
+  burst({ particleCount: 110, spread: 78, startVelocity: 38, origin: { y: 0.72, x: 0.5 }, ticks: 220, scalar: 1.05 });
+  window.setTimeout(() => {
+    burst({ particleCount: 55, angle: 55, spread: 48, origin: { x: 0.08, y: 0.68 } });
+  }, 160);
+  window.setTimeout(() => {
+    burst({ particleCount: 55, angle: 125, spread: 48, origin: { x: 0.92, y: 0.68 } });
+  }, 320);
+}
+
 export function Progress() {
   const [membershipRenewed, setMembershipRenewed] = useState(false);
+  const handleRenewMembership = useCallback(() => {
+    setMembershipRenewed(true);
+    fireRenewalConfetti();
+  }, []);
   const nextTier = "Platinum";
   const progressToNextTier = 72;
 
@@ -108,19 +144,35 @@ export function Progress() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 }}
         layout
-        className={`rounded-2xl p-5 sm:p-6 shadow-sm border transition-colors duration-300 ${
+        className={`rounded-2xl p-5 sm:p-6 shadow-sm border transition-colors duration-500 relative overflow-hidden ${
           membershipRenewed
-            ? "border-green-300 bg-gradient-to-br from-green-50 to-emerald-50"
+            ? "border-green-400/60 bg-gradient-to-br from-emerald-50 via-green-50 to-amber-50/90 shadow-md shadow-green-200/40 ring-2 ring-green-300/30"
             : "border-neutral-200 bg-white"
         }`}
       >
+        {membershipRenewed && (
+          <>
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute -top-16 -right-10 h-44 w-44 rounded-full bg-amber-300/35 blur-3xl"
+              animate={{ scale: [1, 1.12, 1], opacity: [0.45, 0.75, 0.45] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              aria-hidden
+              className="pointer-events-none absolute -bottom-12 -left-8 h-40 w-40 rounded-full bg-emerald-400/25 blur-3xl"
+              animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.65, 0.4] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+            />
+          </>
+        )}
         <AnimatePresence mode="wait">
           {!membershipRenewed ? (
             <motion.div
               key="renew-prompt"
               initial={{ opacity: 1 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
+              exit={{ opacity: 0, scale: 0.98, y: -6 }}
+              transition={{ duration: 0.22 }}
               className="flex flex-col gap-4 sm:flex-row sm:gap-5 sm:items-start min-w-0"
             >
               <div className="w-12 h-12 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center shrink-0 sm:mt-0.5">
@@ -137,8 +189,8 @@ export function Progress() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setMembershipRenewed(true)}
-                  className="inline-flex w-auto max-w-full items-center justify-start px-5 py-3 sm:py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors"
+                  onClick={handleRenewMembership}
+                  className="inline-flex w-auto max-w-full items-center justify-start px-5 py-3 sm:py-2.5 rounded-xl bg-green-700 text-white text-sm font-semibold hover:bg-green-800 transition-colors active:scale-[0.98]"
                 >
                   Renew Membership
                 </button>
@@ -149,34 +201,99 @@ export function Progress() {
               key="renew-confirmed"
               role="status"
               aria-live="polite"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 360, damping: 28 }}
-              className="flex flex-col sm:flex-row gap-5 sm:items-center min-w-0"
+              initial={{ opacity: 0, y: 16, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ type: "spring", stiffness: 320, damping: 26 }}
+              className="relative flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-6 min-w-0 text-center sm:text-left"
             >
-              <div className="flex justify-center sm:justify-start shrink-0">
-                <motion.div
-                  initial={{ scale: 0.4, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: "spring", stiffness: 420, damping: 20, delay: 0.08 }}
-                  className="w-9 h-9 rounded-full bg-white border border-green-500 shadow-sm flex items-center justify-center"
+              {[
+                { top: "8%", left: "6%", delay: 0 },
+                { top: "18%", right: "10%", delay: 0.15 },
+                { bottom: "22%", left: "12%", delay: 0.3 },
+                { bottom: "12%", right: "8%", delay: 0.45 },
+              ].map((pos, i) => (
+                <motion.span
+                  key={i}
+                  aria-hidden
+                  className="pointer-events-none absolute text-amber-500/90"
+                  style={{ top: pos.top, left: pos.left, right: pos.right, bottom: pos.bottom }}
+                  initial={{ opacity: 0, scale: 0, rotate: -20 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18, delay: 0.2 + pos.delay }}
                 >
-                  <Check
-                    className="text-green-600"
-                    size={16}
-                    strokeWidth={2.5}
-                    aria-hidden
-                  />
+                  <motion.span
+                    animate={{ rotate: [0, 12, -8, 0], scale: [1, 1.15, 1] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: pos.delay }}
+                  >
+                    <Sparkles size={20} strokeWidth={1.75} className="drop-shadow-sm" />
+                  </motion.span>
+                </motion.span>
+              ))}
+
+              <div className="relative flex justify-center sm:justify-start shrink-0">
+                <motion.div
+                  aria-hidden
+                  className="absolute inset-0 m-auto h-24 w-24 rounded-full bg-green-400/25"
+                  initial={{ scale: 0.6, opacity: 0.9 }}
+                  animate={{ scale: 2.4, opacity: 0 }}
+                  transition={{ duration: 1.1, ease: "easeOut" }}
+                />
+                <motion.div
+                  initial={{ scale: 0.2, rotate: -25, opacity: 0 }}
+                  animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 16, delay: 0.06 }}
+                  className="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl bg-gradient-to-br from-green-500 to-emerald-600 text-white shadow-lg shadow-green-600/35 ring-4 ring-white/80"
+                >
+                  <motion.div
+                    animate={{ y: [0, -3, 0], rotate: [0, -6, 6, 0] }}
+                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <PartyPopper size={32} strokeWidth={1.5} aria-hidden />
+                  </motion.div>
                 </motion.div>
               </div>
-              <div className="min-w-0 flex-1 text-center sm:text-left space-y-0.5">
-                <h2 className="text-sm font-semibold text-green-950 leading-snug">
-                  Membership Renewed
-                </h2>
-                <p className="text-xs text-green-900/90 leading-relaxed">
-                  Your renewal is confirmed. Your Family Gold benefits stay active — enjoy another year of perks and savings.{" "}
-                  <span className="font-semibold">A confirmation has been sent to your email.</span>
-                </p>
+
+              <div className="min-w-0 flex-1 space-y-3">
+                <motion.h2
+                  className="text-xl sm:text-2xl font-bold text-green-950 leading-tight tracking-tight"
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 280, damping: 24, delay: 0.1 }}
+                >
+                  You’re renewed — welcome back, Grace!
+                </motion.h2>
+                <motion.p
+                  className="text-sm text-green-900/90 leading-relaxed"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.18, duration: 0.35 }}
+                >
+                  Your renewal is confirmed. Family Gold stays active for another year of perks and savings.{" "}
+                  <span className="font-semibold text-green-950">Check your email for confirmation.</span>
+                </motion.p>
+                <motion.ul
+                  className="flex flex-wrap justify-center sm:justify-start gap-2 pt-1"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    hidden: {},
+                    visible: { transition: { staggerChildren: 0.08, delayChildren: 0.28 } },
+                  }}
+                >
+                  {["Family Gold locked in", "Same great benefits", "Another year of memories"].map((label) => (
+                    <motion.li
+                      key={label}
+                      variants={{
+                        hidden: { opacity: 0, y: 8, scale: 0.92 },
+                        visible: { opacity: 1, y: 0, scale: 1 },
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                      className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-green-800 shadow-sm border border-green-200/80 backdrop-blur-sm"
+                    >
+                      {label}
+                    </motion.li>
+                  ))}
+                </motion.ul>
               </div>
             </motion.div>
           )}
