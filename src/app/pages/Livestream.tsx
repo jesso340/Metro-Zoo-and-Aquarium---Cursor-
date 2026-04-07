@@ -7,8 +7,7 @@ const livestreamData: Record<string, any> = {
   "baby-penguin-hatching": {
     id: "baby-penguin-hatching",
     title: "Baby Penguin Hatching LIVE",
-    thumbnail:
-      "https://images.unsplash.com/photo-1746311473391-0c0bf08ad9b9?auto=format&fit=crop&w=1080&q=80",
+    thumbnail: "/images/baby-penguin-chick.jpg",
     viewers: 1247,
     points: 50,
     duration: "45 min remaining"

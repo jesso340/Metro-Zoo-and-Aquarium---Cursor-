@@ -261,7 +261,7 @@ export const virtualEvents: VirtualEvent[] = [
     id: "ve-1",
     title: "Baby Penguin Hatching 🐧",
     description: "Watch our Gentoo penguin chick emerge live from its egg!",
-    thumbnail: "https://images.unsplash.com/photo-1685143288924-945cabda4717?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZW5ndWluJTIwc3dpbW1pbmclMjB1bmRlcndhdGVyfGVufDF8fHx8MTc3NDM3OTcyM3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    thumbnail: "/images/baby-penguin-chick.jpg",
     points: 50,
     startTime: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours from now
     duration: "45 min",

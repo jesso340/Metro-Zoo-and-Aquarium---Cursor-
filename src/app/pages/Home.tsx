@@ -156,7 +156,7 @@ export function Home() {
             >
               <div className="relative h-48">
                 <img 
-                  src="https://images.unsplash.com/photo-1746311473391-0c0bf08ad9b9?auto=format&fit=crop&w=1080&q=80"
+                  src="/images/baby-penguin-chick.jpg"
                   alt="Baby penguin hatching"
                   className="w-full h-full object-cover"
                 />
