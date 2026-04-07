@@ -1,3 +1,5 @@
+import { babyPenguinChickUrl } from "../constants/media";
+
 export interface Benefit {
   id: string;
   title: string;
@@ -261,7 +263,7 @@ export const virtualEvents: VirtualEvent[] = [
     id: "ve-1",
     title: "Baby Penguin Hatching 🐧",
     description: "Watch our Gentoo penguin chick emerge live from its egg!",
-    thumbnail: "/images/baby-penguin-chick.jpg",
+    thumbnail: babyPenguinChickUrl,
     points: 50,
     startTime: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours from now
     duration: "45 min",

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Calendar, MapPin, Users, Clock, AlertCircle, Video, ArrowRight, Sparkles, ChevronRight } from "lucide-react";
 import { Link, useParams } from "react-router";
+import { babyPenguinChickUrl } from "../constants/media";
 
 const eventData: Record<string, any> = {
   "family-conservation-day": {
@@ -38,7 +39,7 @@ const eventData: Record<string, any> = {
         points: 50,
         viewers: "1.2k",
         status: "live-soon",
-        image: "/images/baby-penguin-chick.jpg"
+        image: babyPenguinChickUrl
       },
       {
         id: "zookeeper-qna",
@@ -60,7 +61,7 @@ const eventData: Record<string, any> = {
     time: "2:00 PM",
     location: "Antarctic Zone (Livestream)",
     attendees: 1200,
-    image: "/images/baby-penguin-chick.jpg",
+    image: babyPenguinChickUrl,
     tags: ["Livestream", "Family Friendly", "Interactive"],
     hasConflict: false,
     benefits: [

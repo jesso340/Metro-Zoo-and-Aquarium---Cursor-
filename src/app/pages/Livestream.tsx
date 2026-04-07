@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Play, Pause, Volume2, VolumeX, Maximize2, Users, Eye, Heart, Share2, ArrowLeft, ArrowRight } from "lucide-react";
 import { Link, useParams, useNavigate } from "react-router";
+import { babyPenguinChickUrl } from "../constants/media";
 
 const livestreamData: Record<string, any> = {
   "baby-penguin-hatching": {
     id: "baby-penguin-hatching",
     title: "Baby Penguin Hatching LIVE",
-    thumbnail: "/images/baby-penguin-chick.jpg",
+    thumbnail: babyPenguinChickUrl,
     viewers: 1247,
     points: 50,
     duration: "45 min remaining"

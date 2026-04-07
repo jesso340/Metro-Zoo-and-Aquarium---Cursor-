@@ -6,6 +6,7 @@ import { BenefitCard } from "../components/BenefitCard";
 import { StatCard } from "../components/StatCard";
 import { BenefitModal } from "../components/BenefitModal";
 import { Link } from "react-router";
+import { babyPenguinChickUrl } from "../constants/media";
 
 export function Home() {
   const [selectedBenefit, setSelectedBenefit] = useState<typeof benefits[0] | null>(null);
@@ -156,7 +157,7 @@ export function Home() {
             >
               <div className="relative h-48">
                 <img 
-                  src="/images/baby-penguin-chick.jpg"
+                  src={babyPenguinChickUrl}
                   alt="Baby penguin hatching"
                   className="w-full h-full object-cover"
                 />
