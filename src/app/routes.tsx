@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router";
+import { RootShell } from "./components/RootShell";
 import { Layout } from "./components/Layout";
 import { Home } from "./pages/Home";
 import { Benefits } from "./pages/Benefits";
@@ -15,35 +16,28 @@ import { IOSHomeScreen } from "./pages/IOSHomeScreen";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="/ios-home" replace />,
-  },
-  {
-    path: "/notification",
-    Component: NotificationScreen,
-  },
-  {
-    path: "/ios-home",
-    Component: IOSHomeScreen,
-  },
-  {
-    path: "/app",
-    Component: Layout,
+    element: <RootShell />,
     children: [
-      { index: true, Component: Home },
-      { path: "benefits", Component: Benefits },
-      { path: "visit", Component: VisitAssistant },
-      { path: "map", Component: InteractiveMap },
-      { path: "visit-assistant", Component: VisitAssistant },
-      { path: "progress", Component: Progress },
-      { path: "community", Component: Community },
-      { path: "notifications", Component: Notifications },
-      { path: "events/:eventId", Component: EventDetail },
-      { path: "livestream/:streamId/summary", Component: LivestreamSummary },
+      { index: true, element: <Navigate to="/ios-home" replace /> },
+      { path: "notification", Component: NotificationScreen },
+      { path: "ios-home", Component: IOSHomeScreen },
+      {
+        path: "app",
+        Component: Layout,
+        children: [
+          { index: true, Component: Home },
+          { path: "benefits", Component: Benefits },
+          { path: "visit", Component: VisitAssistant },
+          { path: "map", Component: InteractiveMap },
+          { path: "visit-assistant", Component: VisitAssistant },
+          { path: "progress", Component: Progress },
+          { path: "community", Component: Community },
+          { path: "notifications", Component: Notifications },
+          { path: "events/:eventId", Component: EventDetail },
+          { path: "livestream/:streamId/summary", Component: LivestreamSummary },
+        ],
+      },
+      { path: "livestream/:streamId", Component: Livestream },
     ],
-  },
-  {
-    path: "/livestream/:streamId",
-    Component: Livestream,
   },
 ]);
