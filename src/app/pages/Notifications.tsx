@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Bell, Gift, Calendar, TrendingUp, Check, Trash2, Video } from "lucide-react";
 import { notifications as initialNotifications, Notification } from "../data/mockData";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export function Notifications() {
   const [notifications, setNotifications] = useState(initialNotifications);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash !== "#penguin-livestream") return;
+    const t = window.setTimeout(() => {
+      document.getElementById("penguin-livestream")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 350);
+    return () => window.clearTimeout(t);
+  }, [location.pathname, location.hash, notifications.length]);
 
   const handleMarkAsRead = (id: string) => {
     setNotifications((prev) =>
@@ -170,7 +182,12 @@ export function Notifications() {
             // Wrap livestream notification with Link
             if (isLivestream) {
               return (
-                <Link key={notification.id} to="/livestream/baby-penguin-hatching">
+                <Link
+                  key={notification.id}
+                  id="penguin-livestream"
+                  to="/livestream/baby-penguin-hatching"
+                  className="block scroll-mt-24"
+                >
                   {notificationContent}
                 </Link>
               );
