@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
+import { QRCodeSVG } from "qrcode.react";
 import { MessageCircle, X, Send, Sparkles, Ticket, Bird, Map, Utensils, Navigation, List, Search, Coffee, Footprints, Clock, CheckCircle2, DollarSign, Timer, ChevronLeft, MoreHorizontal, Mic, Keyboard, Phone, Plus, MapPin, Gift, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { familyAdventureItinerary } from "../data/familyAdventureItinerary";
@@ -16,6 +17,10 @@ interface Message {
   itinerary?: ChatItinerary;
   tourSuggestionChips?: { label: string; icon: LucideIcon; action?: "trip-perks" }[];
 }
+
+/** Encodes a real, scannable QR for the prototype priority-entry pass. */
+const PRIORITY_ENTRY_QR_VALUE =
+  "https://members.metrozoo.org/digital-pass/priority?member=grace-chen&tier=family-gold&valid=2026-04-06";
 
 export function ZooAssistant() {
   const navigate = useNavigate();
@@ -199,15 +204,22 @@ export function ZooAssistant() {
                   <X size={20} className="text-neutral-400" />
                 </button>
               </div>
-              <div className="bg-neutral-50 p-6 rounded-2xl border-2 border-dashed border-neutral-200 mb-6">
-                <div className="aspect-square bg-white rounded-xl flex items-center justify-center p-4 shadow-inner">
-                  {/* Simulated QR Code */}
-                  <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-1">
-                    {Array.from({ length: 16 }).map((_, i) => (
-                      <div key={i} className={`rounded-sm ${Math.random() > 0.5 ? 'bg-neutral-900' : 'bg-transparent'}`} />
-                    ))}
-                  </div>
+              <div className="bg-neutral-50 p-4 sm:p-5 rounded-2xl border border-neutral-200 mb-6">
+                <div className="mx-auto w-fit rounded-lg bg-white p-3 shadow-inner ring-1 ring-neutral-200/80">
+                  <QRCodeSVG
+                    value={PRIORITY_ENTRY_QR_VALUE}
+                    size={208}
+                    level="M"
+                    marginSize={2}
+                    bgColor="#ffffff"
+                    fgColor="#0a0a0a"
+                    title="Metro Zoo priority entry digital pass"
+                    className="block h-auto max-w-full rounded-[2px]"
+                  />
                 </div>
+                <p className="mt-3 text-center text-[11px] font-medium uppercase tracking-wide text-neutral-400">
+                  Member priority · Family Gold
+                </p>
               </div>
               <p className="text-sm text-neutral-500 mb-6">Scan this code at any member priority entrance.</p>
               <button className="w-full bg-green-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-green-800 transition-colors">
