@@ -110,10 +110,11 @@ export function NotificationScreen() {
           )}
           {!hideSecondNotification && (
             <motion.div
+              id="penguin-livestream-lock-notification"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: hideFirstNotification ? 0.2 : 0.35 }}
-              className="w-full"
+              className="w-full scroll-mt-24"
             >
               <IOSNotification
                 expanded={true}

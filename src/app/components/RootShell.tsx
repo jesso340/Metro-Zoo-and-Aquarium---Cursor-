@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 /**
  * Prototype shortcuts (ignored while typing in form fields):
  * - **R** → iOS home screen
- * - **P** → Notifications, scrolled to baby penguin livestream item
+ * - **P** → iOS lock screen (`/notification`) showing the baby penguin livestream banner only
  */
 function ShellHotkeys() {
   const navigate = useNavigate();
@@ -24,7 +24,9 @@ function ShellHotkeys() {
       }
       if (k === "p" || k === "P") {
         e.preventDefault();
-        navigate("/app/notifications#penguin-livestream");
+        navigate("/notification", {
+          state: { showSecondNotificationOnly: true },
+        });
         return;
       }
     };
