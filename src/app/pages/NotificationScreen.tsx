@@ -37,7 +37,7 @@ export function NotificationScreen() {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-[#000000] flex flex-col max-w-[430px] mx-auto relative overflow-hidden">
+    <div className="min-h-screen bg-[#000000] flex flex-col max-w-[var(--metro-shell-max-width)] mx-auto relative overflow-hidden">
       {/* Background Image - Sunset */}
       <div className="absolute inset-0">
         <ImageWithFallback

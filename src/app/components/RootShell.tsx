@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { DeviceFrame } from "./DeviceFrame";
 
 /**
  * Prototype shortcuts (ignored while typing in form fields):
@@ -41,7 +42,9 @@ export function RootShell() {
   return (
     <>
       <ShellHotkeys />
-      <Outlet />
+      <DeviceFrame>
+        <Outlet />
+      </DeviceFrame>
     </>
   );
 }

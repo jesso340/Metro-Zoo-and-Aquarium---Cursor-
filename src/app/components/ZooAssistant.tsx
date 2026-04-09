@@ -508,7 +508,7 @@ export function ZooAssistant() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-24 right-[calc(50%-215px+1.5rem)] w-[51px] h-[51px] bg-[#0B827C] rounded-full shadow-[0_6px_24px_rgb(0,0,0,0.25)] flex items-center justify-center text-white hover:bg-[#0A7571] transition-all z-50"
+            className="fixed bottom-24 right-[calc(50%-var(--metro-shell-max-width)/2+1.5rem)] w-[51px] h-[51px] bg-[#0B827C] rounded-full shadow-[0_6px_24px_rgb(0,0,0,0.25)] flex items-center justify-center text-white hover:bg-[#0A7571] transition-all z-50"
           >
             <MessageCircle size={26} />
           </motion.button>
@@ -523,7 +523,7 @@ export function ZooAssistant() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed inset-0 z-[100] bg-white flex flex-col max-w-[430px] mx-auto shadow-2xl overflow-hidden"
+            className="fixed inset-0 z-[100] bg-white flex flex-col max-w-[var(--metro-shell-max-width)] mx-auto shadow-2xl overflow-hidden"
           >
             {/* Header - iOS Style */}
             <div className="bg-white border-b border-neutral-100 px-4 pt-12 pb-4 flex items-center justify-between">

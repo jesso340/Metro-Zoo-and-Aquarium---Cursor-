@@ -66,7 +66,7 @@ export function Livestream() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-900 max-w-[430px] mx-auto border-x border-neutral-800 shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-neutral-900 max-w-[var(--metro-shell-max-width)] mx-auto border-x border-neutral-800 shadow-2xl relative overflow-hidden">
       {/* Top Bar */}
       <div className="bg-neutral-800 border-b border-neutral-700 sticky top-0 z-50">
         <div className="w-full px-4 py-3 flex items-center justify-between">

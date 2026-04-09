@@ -1,6 +1,43 @@
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Metro shell: iPhone 16 width; top inset from env(safe-area-inset-top) on real devices.
+ * When env() is 0 (desktop browsers), --metro-safe-area-fallback-min shows a preview band so
+ * the safe area is visible at any URL without a physical notch.
+ */
+.metro-header-safe-top {
+  box-sizing: border-box;
+  width: 100%;
+  flex-shrink: 0;
+  /* At least env top + extra; never smaller than fallback so you can see the region in dev */
+  --metro-header-top-total: max(
+    calc(env(safe-area-inset-top, 0px) + var(--metro-header-extra-top, 0px)),
+    var(--metro-safe-area-fallback-min, 0px)
+  );
+  height: var(--metro-header-top-total);
+  min-height: var(--metro-header-top-total);
+  background: #fff;
+}
+
+/* Bottom nav: home-indicator zone — height matches env(safe-area-inset-bottom) on device */
+.metro-bottom-safe-inset {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: max(env(safe-area-inset-bottom, 0px), var(--metro-safe-area-fallback-min-bottom, 20px));
+  height: max(env(safe-area-inset-bottom, 0px), var(--metro-safe-area-fallback-min-bottom, 20px));
+  background: linear-gradient(0deg, rgb(203 213 225) 0%, rgb(226 232 240) 100%);
+}
+
 :root {
+  /* Logical width matches iPhone 16 (non-Plus); Plus/Pro Max get side margins in browser chrome */
+  --metro-shell-max-width: 393px;
+  --metro-header-extra-top: 0px;
+  /* Visible minimum when env(safe-area-inset-top) is 0 (e.g. desktop) — real iPhone uses env, not this */
+  --metro-safe-area-fallback-min: 52px;
+  --metro-safe-area-fallback-min-bottom: 20px;
+  /* Used in calc() for main/footer — mirror env() for consistency */
+  --metro-safe-area-top: env(safe-area-inset-top, 0px);
+  --metro-safe-area-bottom: env(safe-area-inset-bottom, 0px);
   --font-size: 16px;
   --background: #FAFAF5;
   --foreground: oklch(0.145 0 0);
