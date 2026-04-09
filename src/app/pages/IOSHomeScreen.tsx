@@ -114,7 +114,7 @@ export function IOSHomeScreen() {
 
   return (
     <motion.div
-      className="min-h-screen relative overflow-hidden max-w-[var(--metro-shell-max-width)] mx-auto bg-black"
+      className="min-h-screen relative overflow-hidden max-w-[430px] mx-auto bg-black"
       drag="y"
       dragConstraints={{ top: 0, bottom: 0 }}
       dragElastic={0.2}

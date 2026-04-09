@@ -1,8 +1,8 @@
 import { Outlet, Link, useLocation } from "react-router";
-import { Home, Gift, TrendingUp, BarChart3, Users, Bell, MapPin, Footprints } from "lucide-react";
+import { Home, Gift, TrendingUp, BarChart3, Users, Bell, Leaf, MapPin, Footprints } from "lucide-react";
 import { notifications } from "../data/mockData";
 import { ZooAssistant } from "./ZooAssistant";
-import { useEffect, type CSSProperties } from "react";
+import { useEffect } from "react";
 
 export function Layout() {
   const location = useLocation();
@@ -23,24 +23,16 @@ export function Layout() {
   ];
 
   return (
-    <div
-      className="min-h-dvh w-full max-w-[var(--metro-shell-max-width)] mx-auto bg-neutral-50 shadow-2xl relative overflow-x-hidden"
-      style={
-        {
-          ["--metro-shell-max-width" as string]: "393px",
-          ["--metro-header-extra-top" as string]: "0px",
-        } as CSSProperties
-      }
-    >
-      <header className="sticky top-0 z-50 flex flex-col bg-white shadow-sm">
-        <div className="metro-header-safe-top shrink-0" aria-hidden />
-        <div className="w-full py-[10px] pl-[max(16px,env(safe-area-inset-left,0px))] pr-[max(16px,env(safe-area-inset-right,0px))]">
+    <div className="min-h-screen bg-neutral-50 max-w-[430px] mx-auto border-x border-neutral-200 shadow-2xl relative overflow-hidden">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
+        <div className="w-full px-[16px] py-[10px]">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center shadow-md shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center shadow-md">
                 <Footprints className="text-white" size={20} />
               </div>
-              <div className="min-w-0">
+              <div>
                 <h1 className="text-lg font-bold text-green-800 leading-snug">Metro Zoo and Aquarium</h1>
               </div>
             </div>
@@ -63,7 +55,7 @@ export function Layout() {
                     <Icon size={18} />
                     <span className="text-sm font-medium">{item.label}</span>
                     {item.badge && item.badge > 0 && (
-                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-green-600 text-white text-xs flex items-center justify-center rounded-full">
+                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-orange-500 text-white text-xs flex items-center justify-center rounded-full">
                         {item.badge}
                       </span>
                     )}
@@ -81,7 +73,7 @@ export function Layout() {
               <Link to="/app/notifications" className="relative p-2">
                 <Bell size={24} className="text-neutral-600" />
                 {unreadCount > 0 && (
-                  <span className="absolute top-0 right-0 w-5 h-5 bg-green-600 text-white text-xs flex items-center justify-center rounded-full">
+                  <span className="absolute top-0 right-0 w-5 h-5 bg-orange-500 text-white text-xs flex items-center justify-center rounded-full">
                     {unreadCount}
                   </span>
                 )}
@@ -92,12 +84,12 @@ export function Layout() {
       </header>
 
       {/* Main Content */}
-      <main className="w-full py-6 pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] overflow-y-auto pb-[calc(6.75rem+max(env(safe-area-inset-bottom,0px),var(--metro-safe-area-fallback-min-bottom,20px)))]">
+      <main className="w-full px-4 py-6 overflow-y-auto pb-24">
         <Outlet />
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[var(--metro-shell-max-width)] bg-white border-t border-neutral-200 pb-0 shadow-lg z-50">
+      <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-white border-t border-neutral-200 pb-safe shadow-lg z-50">
         <div className="flex items-center justify-around h-16">
           {navItems.slice(0, 5).map((item) => {
             const Icon = item.icon;
@@ -113,7 +105,7 @@ export function Layout() {
                 <Icon size={20} />
                 <span className="text-[10px] mt-1">{item.label}</span>
                 {item.badge && item.badge > 0 && (
-                  <span className="absolute top-2 right-1/4 w-4 h-4 bg-green-600 text-white text-xs flex items-center justify-center rounded-full">
+                  <span className="absolute top-2 right-1/4 w-4 h-4 bg-orange-500 text-white text-xs flex items-center justify-center rounded-full">
                     {item.badge}
                   </span>
                 )}
@@ -121,21 +113,14 @@ export function Layout() {
             );
           })}
         </div>
-        {/* Home indicator row + visible bottom safe-area strip (env is 0 on desktop — min height still shows) */}
-        <div className="metro-bottom-safe flex flex-col bg-slate-200/90">
-          <div className="h-5 flex justify-center items-center pt-1">
-            <div className="w-32 h-1 bg-neutral-400/80 rounded-full" />
-          </div>
-          <div
-            className="metro-bottom-safe-inset w-full shrink-0 border-t border-slate-300/80"
-            aria-hidden
-            title="Bottom safe area (home indicator). Grows on a real iPhone."
-          />
+        {/* iOS Home Indicator Spacer */}
+        <div className="h-5 flex justify-center items-center pb-2">
+          <div className="w-32 h-1 bg-neutral-200 rounded-full" />
         </div>
       </nav>
 
       {/* Zoo Assistant */}
-      <div className="fixed z-50 right-[calc(50%-var(--metro-shell-max-width)/2+1.5rem)] bottom-[calc(5.75rem+max(env(safe-area-inset-bottom,0px),var(--metro-safe-area-fallback-min-bottom,20px)))]">
+      <div className="fixed bottom-24 right-[calc(50%-215px+1.5rem)] z-50">
         <ZooAssistant />
       </div>
     </div>

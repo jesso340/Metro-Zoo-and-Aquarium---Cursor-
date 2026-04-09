@@ -2,7 +2,7 @@
 @source '../**/*.{js,ts,jsx,tsx}';
 
 /*
- * Phone shell (iPhone 16 width via --metro-shell-max-width) should not switch to tablet/desktop
+ * Phone-width shell (max-w-[430px]) should not switch to “tablet/desktop” layouts when
  * the browser window is widened. Tailwind’s min-width breakpoints use the viewport, so
  * we set them beyond any real screen — only the default (non-prefixed) styles apply.
  */

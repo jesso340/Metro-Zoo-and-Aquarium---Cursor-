@@ -85,7 +85,7 @@ export function IOSHomeScreen() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden max-w-[var(--metro-shell-max-width)] mx-auto bg-black">
+    <div className="min-h-screen relative overflow-hidden max-w-[430px] mx-auto bg-black">
       {/* Background Wallpaper */}
       <div className="absolute inset-0">
         <ImageWithFallback
