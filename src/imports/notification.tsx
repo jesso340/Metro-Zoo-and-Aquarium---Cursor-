@@ -8,7 +8,7 @@ export function NotificationScreen() {
   const navigate = useNavigate();
 
   const handleViewDetails = () => {
-    navigate("/ios-home");
+    navigate("/livestream/baby-penguin-hatching");
   };
 
   return (

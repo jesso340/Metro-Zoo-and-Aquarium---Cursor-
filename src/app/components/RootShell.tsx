@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 
 /**
  * Prototype shortcuts (ignored while typing in form fields):
- * - **R** → iOS home screen
- * - **P** → iOS lock screen (`/notification`) showing the baby penguin livestream banner only
+ * - **R** → main app (`/app`)
+ * - **P** → lock screen (`/notification`) showing the baby penguin livestream banner only
  */
 function ShellHotkeys() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function ShellHotkeys() {
       const k = e.key;
       if (k === "r" || k === "R") {
         e.preventDefault();
-        navigate("/ios-home");
+        navigate("/app");
         return;
       }
       if (k === "p" || k === "P") {

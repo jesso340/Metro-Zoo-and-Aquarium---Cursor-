@@ -28,7 +28,7 @@ export function NotificationScreen() {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
-        navigate("/ios-home");
+        navigate("/app");
       }
     };
 

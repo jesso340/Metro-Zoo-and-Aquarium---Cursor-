@@ -12,15 +12,13 @@ import { EventDetail } from "./pages/EventDetail";
 import { Livestream } from "./pages/Livestream";
 import { LivestreamSummary } from "./pages/LivestreamSummary";
 import { NotificationScreen } from "./pages/NotificationScreen";
-import { IOSHomeScreen } from "./pages/IOSHomeScreen";
 
 export const router = createBrowserRouter([
   {
     element: <RootShell />,
     children: [
-      { index: true, element: <Navigate to="/ios-home" replace /> },
+      { index: true, element: <Navigate to="/app" replace /> },
       { path: "notification", Component: NotificationScreen },
-      { path: "ios-home", Component: IOSHomeScreen },
       {
         path: "app",
         Component: Layout,
