@@ -1,3 +1,12 @@
+/* Animated mesh gradient — zoo-palette greens, teals, earth tones */
+@keyframes meshShift {
+  0%   { background-position:   0%   0%,  100%  50%,   30%  80%,   70%  20%,   50%  50%; }
+  25%  { background-position:  40%  60%,   60%   0%,   80%  30%,   10%  70%,   20%  90%; }
+  50%  { background-position: 100% 100%,    0%  80%,   50%  10%,   90%  60%,   70%  30%; }
+  75%  { background-position:  60%  30%,   30% 100%,   10%  50%,   50%  90%,   80%  10%; }
+  100% { background-position:   0%   0%,  100%  50%,   30%  80%,   70%  20%,   50%  50%; }
+}
+
 /* iPhone bezel presentation */
 .bezel-demo-page {
   min-height: 100vh;
@@ -6,7 +15,15 @@
   justify-content: center;
   padding: 1rem;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #d4e4c8 0%, #e8ede3 40%, #481A54 100%);
+  background-color: #1a3a2a;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 30% 20%, rgba(45, 80, 22, 0.8) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 80% 70%, rgba(11, 130, 124, 0.7) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 45% at 20% 80%, rgba(90, 107, 77, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 55% at 70% 30%, rgba(139, 105, 20, 0.5) 0%, transparent 70%),
+    radial-gradient(ellipse 65% 65% at 50% 50%, rgba(212, 228, 200, 0.25) 0%, transparent 60%);
+  background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%;
+  animation: meshShift 25s ease-in-out infinite;
 }
 
 /*
