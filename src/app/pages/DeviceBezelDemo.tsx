@@ -1,10 +1,22 @@
 import { useRef, useEffect } from "react";
+import { useSearchParams } from "react-router";
 
 const BEZEL_IMG = "/images/iphone-14-bezel.png";
 
-/** Full-page presentation: prototype embedded in the iPhone bezel PNG (iframe → /ios-home). */
+/** Supported iframe starting screens via `?screen=` query param. */
+const SCREEN_MAP: Record<string, string> = {
+  home: "/ios-home",
+  notification: "/notification",
+  app: "/app",
+};
+const DEFAULT_SCREEN = "/ios-home";
+
+/** Full-page presentation: prototype embedded in the iPhone bezel PNG. */
 export function DeviceBezelDemo() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [searchParams] = useSearchParams();
+  const screenKey = searchParams.get("screen") ?? "";
+  const iframeSrc = SCREEN_MAP[screenKey] ?? DEFAULT_SCREEN;
 
   useEffect(() => {
     if (import.meta.hot) {
@@ -21,7 +33,7 @@ export function DeviceBezelDemo() {
           <iframe
             ref={iframeRef}
             className="bezel-frame__iframe"
-            src="/ios-home"
+            src={iframeSrc}
             title="Metro Zoo and Aquarium prototype"
           />
         </div>

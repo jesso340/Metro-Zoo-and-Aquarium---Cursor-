@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { Play, Pause, Volume2, VolumeX, Maximize2, Users, Eye, Heart, Share2, ArrowLeft, ArrowRight } from "lucide-react";
 import { Link, useParams, useNavigate } from "react-router";
 import { babyPenguinChickUrl } from "../constants/media";
+import { IOSStatusBar } from "../components/IOSStatusBar";
 
 const livestreamData: Record<string, any> = {
   "baby-penguin-hatching": {
@@ -69,7 +70,8 @@ export function Livestream() {
     <div className="min-h-screen bg-neutral-900 max-w-[430px] mx-auto border-x border-neutral-800 shadow-2xl relative overflow-hidden">
       {/* Top Bar */}
       <div className="bg-neutral-800 border-b border-neutral-700 sticky top-0 z-50">
-        <div className="w-full px-4 py-3 flex items-center justify-between">
+        <IOSStatusBar variant="light" />
+        <div className="w-full px-[24px] py-3 flex items-center justify-between">
           <Link 
             to={`/app/events/${streamId}`}
             className="flex items-center gap-2 text-white hover:text-green-400 transition-colors"
@@ -90,7 +92,7 @@ export function Livestream() {
         </div>
       </div>
 
-      <div className="w-full p-4 space-y-4 h-[calc(100vh-56px)] flex flex-col overflow-hidden">
+      <div className="w-full px-[24px] py-4 space-y-4 h-[calc(100vh-96px)] flex flex-col overflow-hidden">
         {/* Main Video Player */}
         <div className="flex-1 min-h-0 flex flex-col space-y-4">
           {/* Video Container */}

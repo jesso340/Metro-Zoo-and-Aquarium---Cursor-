@@ -4,11 +4,11 @@ import { useNavigate } from "react-router";
 
 /**
  * Prototype shortcuts (ignored while typing in form fields):
- * - **R** → demo in device bezel (`/demo`)
- * - **P** → lock screen (`/notification`) showing the baby penguin livestream banner only
+ * - **R** → iOS home screen (inside bezel)
+ * - **P** → lock screen / notification (inside bezel)
  *
- * When running inside the bezel iframe, shortcuts navigate the *parent* window
- * so the bezel stays visible.
+ * Inside the bezel iframe: navigate within the iframe so the bezel stays.
+ * At the top level: navigate to /demo?screen=... so the bezel wraps the target.
  */
 function ShellHotkeys() {
   const navigate = useNavigate();
@@ -33,11 +33,11 @@ function ShellHotkeys() {
       if (k === "p" || k === "P") {
         e.preventDefault();
         if (isInsideIframe) {
-          try { window.top!.location.href = "/notification"; } catch { /* cross-origin */ }
-        } else {
           navigate("/notification", {
             state: { showSecondNotificationOnly: true },
           });
+        } else {
+          navigate("/demo?screen=notification");
         }
         return;
       }
