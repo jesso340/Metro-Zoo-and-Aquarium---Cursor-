@@ -135,7 +135,7 @@
 
 /* Main app wrapper — use .app on the root shell, or .header on a sticky bar (not both for the same offset) */
 .app {
-  padding-top: var(--safe-top);
+  padding-top: 0;
   padding-bottom: var(--safe-bottom);
   box-sizing: border-box;
 }

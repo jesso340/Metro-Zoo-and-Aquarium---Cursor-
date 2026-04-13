@@ -295,7 +295,7 @@ export function Home() {
                 <span className="text-xs font-medium px-3 py-1 bg-green-600 text-white rounded-full">In-Person</span>
                 <span className="text-xs font-medium px-3 py-1 bg-blue-100 text-blue-700 rounded-full">Family Friendly</span>
               </div>
-              <h2 className="text-3xl font-bold text-neutral-900 mb-3">Family Conservation Day</h2>
+              <h2 className="text-xl font-bold text-neutral-900 mb-3">Family Conservation Day</h2>
               <p className="text-neutral-600 mb-4">
                 Join us for a day of hands-on conservation activities! Plant trees, learn about wildlife protection, and help make a difference.
               </p>

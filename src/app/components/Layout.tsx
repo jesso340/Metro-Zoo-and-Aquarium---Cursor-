@@ -2,6 +2,7 @@ import { Outlet, Link, useLocation } from "react-router";
 import { Home, Gift, TrendingUp, BarChart3, Users, Bell, Leaf, MapPin, Footprints } from "lucide-react";
 import { notifications } from "../data/mockData";
 import { ZooAssistant } from "./ZooAssistant";
+import { IOSStatusBar } from "./IOSStatusBar";
 import { useEffect } from "react";
 
 export function Layout() {
@@ -23,10 +24,11 @@ export function Layout() {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50 max-w-[430px] mx-auto border-x border-neutral-200 shadow-2xl relative overflow-hidden">
+    <div className="app min-h-screen bg-neutral-50 max-w-[430px] mx-auto border-x border-neutral-200 shadow-2xl relative overflow-hidden">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-neutral-200 shadow-sm">
-        <div className="w-full px-[16px] py-[10px]">
+        <IOSStatusBar />
+        <div className="w-full px-[24px] py-[10px]">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center shadow-md">
@@ -83,8 +85,8 @@ export function Layout() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="w-full px-4 py-6 overflow-y-auto pb-24">
+      {/* Main Content — 16px layout margins per iOS HIG */}
+      <main className="w-full px-[24px] py-6 overflow-y-auto pb-24">
         <Outlet />
       </main>
 

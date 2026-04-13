@@ -4,11 +4,15 @@ import { useNavigate } from "react-router";
 
 /**
  * Prototype shortcuts (ignored while typing in form fields):
- * - **R** → main app (`/app`)
+ * - **R** → demo in device bezel (`/demo`)
  * - **P** → lock screen (`/notification`) showing the baby penguin livestream banner only
+ *
+ * When running inside the bezel iframe, shortcuts navigate the *parent* window
+ * so the bezel stays visible.
  */
 function ShellHotkeys() {
   const navigate = useNavigate();
+  const isInsideIframe = window !== window.top;
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -19,20 +23,28 @@ function ShellHotkeys() {
       const k = e.key;
       if (k === "r" || k === "R") {
         e.preventDefault();
-        navigate("/app");
+        if (isInsideIframe) {
+          navigate("/ios-home");
+        } else {
+          navigate("/demo");
+        }
         return;
       }
       if (k === "p" || k === "P") {
         e.preventDefault();
-        navigate("/notification", {
-          state: { showSecondNotificationOnly: true },
-        });
+        if (isInsideIframe) {
+          try { window.top!.location.href = "/notification"; } catch { /* cross-origin */ }
+        } else {
+          navigate("/notification", {
+            state: { showSecondNotificationOnly: true },
+          });
+        }
         return;
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [navigate]);
+  }, [navigate, isInsideIframe]);
 
   return null;
 }
