@@ -263,7 +263,7 @@ export function IOSHomeScreen() {
       </div>
 
       {/* Dock */}
-      <div className="absolute bottom-[20px] left-[16px] right-[16px] z-10">
+      <div className="absolute bottom-[20px] left-[22px] right-[22px] z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
